@@ -37,10 +37,11 @@ class TradingStrategy(Strategy):
         return 30
 
     @property
-    def aggressive_mix = {
-        "etf": 60,
-        "letf": 40
-    }
+    def aggressive_mix(self):
+        return {
+            "etf": 60,
+            "letf": 40
+        }
 
     def run(self, data):
         holdings = data["holdings"]
