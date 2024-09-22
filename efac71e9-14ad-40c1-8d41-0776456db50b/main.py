@@ -28,6 +28,14 @@ class TradingStrategy(Strategy):
     def aggressive(self):
         return "aggressive"
 
+    @property
+    def long_duration(self):
+        return 150
+
+    @property
+    def short_duration(self):
+        return 30
+
     def run(self, data):
         holdings = data["holdings"]
         data = data["ohlcv"]
@@ -41,11 +49,11 @@ class TradingStrategy(Strategy):
         standard_stake = 50
         leveraged_stake = 50
 
-        sma_long = SMA(self.letf, data, 150)
+        sma_long = SMA(self.letf, data, self.long_duration)
         current_price = data[-1][self.letf]['close']
         moving_average_long = sma_long[len(sma_long)-1]
 
-        sma_short = SMA(self.letf, data, 30)
+        sma_short = SMA(self.letf, data, self.short_duration)
         moving_average_short = sma_short[len(sma_short)-1]
 
         if moving_average_short > moving_average_long:
