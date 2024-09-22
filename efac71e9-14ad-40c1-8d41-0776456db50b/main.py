@@ -16,7 +16,7 @@ class TradingStrategy(Strategy):
         holdings = data["holdings"]
         data = data["ohlcv"]
 
-        sqqq_stake = 50
+        qqq_stake = 50
         tqqq_stake = 50
 
         tqqq_ma = SMA("TQQQ", data, 5)
