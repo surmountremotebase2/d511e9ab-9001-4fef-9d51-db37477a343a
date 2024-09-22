@@ -53,8 +53,8 @@ class TradingStrategy(Strategy):
             self.strategy = self.conservative
             log("Setting initial strategy")
 
-        standard_stake = 50
-        leveraged_stake = 50
+        standard_stake = 80
+        leveraged_stake = 20
 
         sma_long = SMA(self.letf, data, self.long_duration)
         current_price = data[-1][self.letf]['close']
