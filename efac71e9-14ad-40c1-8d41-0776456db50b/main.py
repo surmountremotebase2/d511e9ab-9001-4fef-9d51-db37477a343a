@@ -20,11 +20,11 @@ class TradingStrategy(Strategy):
         qqq_stake = 50
         tqqq_stake = 50
 
-        tqqq_ma = SMA("TQQQ", data, 200)
+        tqqq_ma = SMA("TQQQ", data, 150)
         current_price = data[-1]["TQQQ"]['close']
         moving_average_30 = tqqq_ma[len(tqqq_ma)-1]
 
-        sma_10 = SMA("TQQQ", data, 50)
+        sma_10 = SMA("TQQQ", data, 30)
         moving_average_10 = sma_10[len(sma_10)-1]
 
         if moving_average_10 > moving_average_30:
