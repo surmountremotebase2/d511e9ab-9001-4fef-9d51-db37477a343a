@@ -21,7 +21,7 @@ class TradingStrategy(Strategy):
 
         tqqq_ma = SMA("TQQQ", data, 30)
         current_price = data[-1]["TQQQ"]['close']
-        moving_average_30 = tqqq_ma[len(tqqq_ma)-1])
+        moving_average_30 = tqqq_ma[len(tqqq_ma)-1]
 
         sma_10 = SMA("TQQQ", data, 10)
         moving_average_10 = sma_10[len(sma_10)-1]
