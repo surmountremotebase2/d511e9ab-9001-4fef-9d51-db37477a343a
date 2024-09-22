@@ -25,4 +25,4 @@ class TradingStrategy(Strategy):
         print("moving_average", tqqq_ma)
         print("current_price", current_price)
 
-        return TargetAllocation({"SQQQ": sqqq_stake, "QQQ": qqq_stake})
+        return TargetAllocation({"TOOO": tqqq_stake, "QQQ": qqq_stake})
