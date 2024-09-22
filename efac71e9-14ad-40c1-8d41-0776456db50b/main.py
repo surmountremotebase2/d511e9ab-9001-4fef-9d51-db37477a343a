@@ -50,7 +50,7 @@ class TradingStrategy(Strategy):
         try:
             test = self.strategy
         except:
-            self.strategy = self.conservative
+            self.strategy = "initial"
             log("Setting initial strategy")
 
         standard_stake = 80
