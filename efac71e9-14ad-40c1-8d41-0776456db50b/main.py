@@ -36,14 +36,14 @@ class TradingStrategy(Strategy):
         if moving_average_10 > moving_average_30:
             if self.strategy != "balanced":
                 log("Switching to balanced")
-                qqq_stake = 5
-                tqqq_stake = 50
+                qqq_stake = 60
+                tqqq_stake = 40
                 self.strategy = "balanced"
                 return TargetAllocation({"TQQQ": tqqq_stake, "QQQ": qqq_stake})
         else:
             if self.strategy != "aggressive":
                 log("Switching to agressive")
-                qqq_stake = 70
-                tqqq_stake = 30
+                qqq_stake = 80
+                tqqq_stake = 20
                 self.strategy = "aggressive"
                 return TargetAllocation({"TQQQ": tqqq_stake, "QQQ": qqq_stake})
