@@ -40,7 +40,7 @@ class TradingStrategy(Strategy):
     @property
     def short_duration(self):
         # Duration in Days for Golden Cross short duration
-        return 30
+        return 20
 
     @property
     def aggressive_mix(self):
