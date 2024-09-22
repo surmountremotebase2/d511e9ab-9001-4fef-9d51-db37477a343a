@@ -41,14 +41,14 @@ class TradingStrategy(Strategy):
         standard_stake = 50
         leveraged_stake = 50
 
-        tqqq_ma = SMA("TQQQ", data, 150)
-        current_price = data[-1]["TQQQ"]['close']
-        moving_average_30 = tqqq_ma[len(tqqq_ma)-1]
+        sma_long = SMA(self.letf, data, 150)
+        current_price = data[-1][self.letf]['close']
+        moving_average_long = sma_long[len(sma_long)-1]
 
-        sma_10 = SMA("TQQQ", data, 30)
-        moving_average_10 = sma_10[len(sma_10)-1]
+        sma_short = SMA(self.letf, data, 30)
+        moving_average_short = sma_short[len(sma_short)-1]
 
-        if moving_average_10 > moving_average_30:
+        if moving_average_short > moving_average_long:
             if self.strategy != self.conservative:
                 log("Switching to balanced")
                 standard_stake = 60
