@@ -46,16 +46,16 @@ class TradingStrategy(Strategy):
     def aggressive_mix(self):
         # Aggressive portfolio weights
         return {
-            "etf": 50,
-            "letf": 50
+            "etf": 60,
+            "letf": 40
         }
     
     @property
     def conservative_mix(self):
         # Conservative portolio weights
         return {
-            "etf": 100,
-            "letf": 0
+            "etf": 80,
+            "letf": 20
         }
 
     def run(self, data):
