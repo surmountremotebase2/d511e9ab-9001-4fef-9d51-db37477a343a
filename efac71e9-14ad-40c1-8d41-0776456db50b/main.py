@@ -36,6 +36,11 @@ class TradingStrategy(Strategy):
     def short_duration(self):
         return 30
 
+    @property
+    def aggressive_mix = {
+        "etf": 
+    }
+
     def run(self, data):
         holdings = data["holdings"]
         data = data["ohlcv"]
@@ -57,16 +62,16 @@ class TradingStrategy(Strategy):
         moving_average_short = sma_short[len(sma_short)-1]
 
         if moving_average_short > moving_average_long:
-            if self.strategy != self.conservative:
-                log("Switching to balanced")
+            if self.strategy != self.aggressive:
+                log("Switching to aggressive")
                 standard_stake = 60
                 leveraged_stake = 40
-                self.strategy = self.conservative
+                self.strategy = self.aggressive
                 return TargetAllocation({self.letf : leveraged_stake, self.etf : standard_stake})
         else:
-            if self.strategy != self.aggressive:
-                log("Switching to agressive")
+            if self.strategy != self.conservative:
+                log("Switching to balanced")
                 standard_stake = 80
                 leveraged_stake = 20
-                self.strategy = self.aggressive
+                self.strategy = self.conservative
                 return TargetAllocation({self.letf: leveraged_stake, self.etf : standard_stake})
