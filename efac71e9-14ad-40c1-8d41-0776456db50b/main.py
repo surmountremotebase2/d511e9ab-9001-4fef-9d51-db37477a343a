@@ -36,7 +36,7 @@ class TradingStrategy(Strategy):
         if moving_average_10 > moving_average_30:
             if self.strategy != "balanced":
                 log("Switching to balanced")
-                qqq_stake = 50
+                qqq_stake = 5
                 tqqq_stake = 50
                 self.strategy = "balanced"
                 return TargetAllocation({"TQQQ": tqqq_stake, "QQQ": qqq_stake})
