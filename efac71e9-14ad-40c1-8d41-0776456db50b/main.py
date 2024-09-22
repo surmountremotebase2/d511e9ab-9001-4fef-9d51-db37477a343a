@@ -12,13 +12,16 @@ class TradingStrategy(Strategy):
     def interval(self):
         return "1day"
     
-    @property
-    def strategy(self):
-        return "balanced"
 
     def run(self, data):
         holdings = data["holdings"]
         data = data["ohlcv"]
+
+        try:
+            test = self.strategy
+        except:
+            self.strategy = "balanced"
+            log("Setting initial strategy")
 
         qqq_stake = 50
         tqqq_stake = 50
