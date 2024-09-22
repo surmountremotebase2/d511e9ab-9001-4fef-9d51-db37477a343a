@@ -5,8 +5,16 @@ from surmount.logging import log
 class TradingStrategy(Strategy):
 
     @property
+    def etf(self):
+        return "QQQ"
+
+    @property
+    def letf(self):
+        return "TQQQ"
+
+    @property
     def assets(self):
-        return ["QQQ", "TQQQ"]
+        return [self.etf, self.letf]
 
     @property
     def interval(self):
