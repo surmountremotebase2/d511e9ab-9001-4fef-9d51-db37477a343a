@@ -42,6 +42,13 @@ class TradingStrategy(Strategy):
             "etf": 60,
             "letf": 40
         }
+    
+    @property
+    def conservative_mix(self):
+        return {
+            "etf": 80,
+            "left": 20
+        }
 
     def run(self, data):
         holdings = data["holdings"]
@@ -53,9 +60,6 @@ class TradingStrategy(Strategy):
             self.strategy = "initial"
             log("Setting initial strategy")
 
-        standard_stake = 80
-        leveraged_stake = 20
-
         sma_long = SMA(self.letf, data, self.long_duration)
         current_price = data[-1][self.letf]['close']
         moving_average_long = sma_long[len(sma_long)-1]
@@ -66,15 +70,15 @@ class TradingStrategy(Strategy):
         if moving_average_short < moving_average_long:
             if self.strategy != self.conservative:
                 log("Switching to balanced")
-                standard_stake = 80
-                leveraged_stake = 20
+                standard_stake = self.conservative.etf
+                leveraged_stake = self.conservative.letf
                 self.strategy = self.conservative
                 return TargetAllocation({self.letf: leveraged_stake, self.etf : standard_stake})
                 
         else:
             if self.strategy != self.aggressive:
                 log("Switching to aggressive")
-                standard_stake = 60
-                leveraged_stake = 40
+                standard_stake = self.conservative.etf
+                leveraged_stake = self.conservative.letf
                 self.strategy = self.aggressive
                 return TargetAllocation({self.letf : leveraged_stake, self.etf : standard_stake})
