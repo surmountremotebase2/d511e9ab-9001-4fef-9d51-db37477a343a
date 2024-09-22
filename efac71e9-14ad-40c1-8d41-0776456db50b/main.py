@@ -70,7 +70,7 @@ class TradingStrategy(Strategy):
         if moving_average_short < moving_average_long:
             if self.strategy != self.conservative:
                 log("Switching to balanced")
-                standard_stake = self.conservative_mix.get("etf")
+                standard_stake = self.conservative_mix["etf"]
                 leveraged_stake = self.conservative_mix["letf"]
                 self.strategy = self.conservative
                 return TargetAllocation({self.letf: leveraged_stake, self.etf : standard_stake})
@@ -78,7 +78,7 @@ class TradingStrategy(Strategy):
         else:
             if self.strategy != self.aggressive:
                 log("Switching to aggressive")
-                standard_stake = 60
+                standard_stake = self.aggressive_mix["etf"]
                 leveraged_stake = 40
                 self.strategy = self.aggressive
                 return TargetAllocation({self.letf : leveraged_stake, self.etf : standard_stake})
