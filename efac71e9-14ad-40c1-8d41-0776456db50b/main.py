@@ -12,6 +12,13 @@ class TradingStrategy(Strategy):
     def interval(self):
         return "1day"
     
+    @property
+    def conservative(self):
+        return "conservative"
+    
+    @property
+    def aggressive(self):
+        return "aggressive"
 
     def run(self, data):
         holdings = data["holdings"]
@@ -20,7 +27,7 @@ class TradingStrategy(Strategy):
         try:
             test = self.strategy
         except:
-            self.strategy = "balanced"
+            self.strategy = self.conservative
             log("Setting initial strategy")
 
         qqq_stake = 50
@@ -34,16 +41,16 @@ class TradingStrategy(Strategy):
         moving_average_10 = sma_10[len(sma_10)-1]
 
         if moving_average_10 > moving_average_30:
-            if self.strategy != "balanced":
+            if self.strategy != self.conservative:
                 log("Switching to balanced")
                 qqq_stake = 60
                 tqqq_stake = 40
-                self.strategy = "balanced"
+                self.strategy = self.conservative
                 return TargetAllocation({"TQQQ": tqqq_stake, "QQQ": qqq_stake})
         else:
-            if self.strategy != "aggressive":
+            if self.strategy != self.aggressive:
                 log("Switching to agressive")
                 qqq_stake = 80
                 tqqq_stake = 20
-                self.strategy = "aggressive"
+                self.strategy = self.aggressive
                 return TargetAllocation({"TQQQ": tqqq_stake, "QQQ": qqq_stake})
