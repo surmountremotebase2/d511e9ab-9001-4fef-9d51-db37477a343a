@@ -47,7 +47,7 @@ class TradingStrategy(Strategy):
     def conservative_mix(self):
         return {
             "etf": 80,
-            "left": 20
+            "letf": 20
         }
 
     def run(self, data):
@@ -82,3 +82,4 @@ class TradingStrategy(Strategy):
                 leveraged_stake = self.conservative_mix["letf"]
                 self.strategy = self.aggressive
                 return TargetAllocation({self.letf : leveraged_stake, self.etf : standard_stake})
+                
