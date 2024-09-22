@@ -15,6 +15,7 @@ class TradingStrategy(Strategy):
     def run(self, data):
         holdings = data["holdings"]
         data = data["ohlcv"]
+        this.strategy = "balanced"
 
         qqq_stake = 50
         tqqq_stake = 50
@@ -27,12 +28,16 @@ class TradingStrategy(Strategy):
         moving_average_10 = sma_10[len(sma_10)-1]
 
         if moving_average_10 > moving_average_30:
-            log("ten day greater")
-            qqq_stake = 50
-            tqqq_stake = 50
+            if this.strategy != "balanced":
+                log("Switching to balanced")
+                qqq_stake = 50
+                tqqq_stake = 50
+                this.strategy = "balanced"
+                return TargetAllocation({"TQQQ": tqqq_stake, "QQQ": qqq_stake})
         else:
-            log("ten day lower")
-            qqq_stake = 70
-            tqqq_stake = 30
-
-        return TargetAllocation({"TQQQ": tqqq_stake, "QQQ": qqq_stake})
+            if this.strategy != "aggressive":
+                log("Switching to agressive")
+                qqq_stake = 70
+                tqqq_stake = 30
+                this.strategy = "aggressive"
+                return TargetAllocation({"TQQQ": tqqq_stake, "QQQ": qqq_stake})
