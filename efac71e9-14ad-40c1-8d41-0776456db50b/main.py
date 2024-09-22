@@ -26,14 +26,12 @@ class TradingStrategy(Strategy):
         sma_10 = SMA("TQQQ", data, 10)
         moving_average_10 = sma_10[len(sma_10)-1]
 
-
-        log("moving_average: " + str(tqqq_ma[len(tqqq_ma)-1]))
-        log("current_price: " + str(current_price))
-
         if moving_average_10 > moving_average_30:
+            log("ten day greater")
             qqq_stake = 50
             tqqq_stake = 50
         else:
+            log("ten day lower")
             qqq_stake = 70
             tqqq_stake = 30
 
