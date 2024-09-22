@@ -54,8 +54,8 @@ class TradingStrategy(Strategy):
     def conservative_mix(self):
         # Conservative portolio weights
         return {
-            "etf": 80,
-            "letf": 20
+            "etf": 100,
+            "letf": 0
         }
 
     def run(self, data):
