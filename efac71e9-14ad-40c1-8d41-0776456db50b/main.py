@@ -32,10 +32,10 @@ class TradingStrategy(Strategy):
                 log("Switching to balanced")
                 qqq_stake = 50
                 tqqq_stake = 50
-                this.strategy = "balanced"
+                self.strategy = "balanced"
                 return TargetAllocation({"TQQQ": tqqq_stake, "QQQ": qqq_stake})
         else:
-            if this.strategy != "aggressive":
+            if self.strategy != "aggressive":
                 log("Switching to agressive")
                 qqq_stake = 70
                 tqqq_stake = 30
