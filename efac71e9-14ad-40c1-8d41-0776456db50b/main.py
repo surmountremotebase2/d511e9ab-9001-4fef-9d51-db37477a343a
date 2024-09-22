@@ -63,8 +63,7 @@ class TradingStrategy(Strategy):
         sma_short = SMA(self.letf, data, self.short_duration)
         moving_average_short = sma_short[len(sma_short)-1]
 
-        if moving_average_short >= moving_average_long:
-            
+        if moving_average_short < moving_average_long:
             if self.strategy != self.aggressive:
                 log("Switching to balanced")
                 standard_stake = 80
