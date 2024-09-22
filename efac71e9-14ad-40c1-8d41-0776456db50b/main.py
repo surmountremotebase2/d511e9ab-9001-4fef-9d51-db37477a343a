@@ -71,7 +71,7 @@ class TradingStrategy(Strategy):
             if self.strategy != self.conservative:
                 log("Switching to balanced")
                 standard_stake = self.conservative_mix.get("etf")
-                leveraged_stake = 20
+                leveraged_stake = self.conservative_mix["letf"]
                 self.strategy = self.conservative
                 return TargetAllocation({self.letf: leveraged_stake, self.etf : standard_stake})
                 
