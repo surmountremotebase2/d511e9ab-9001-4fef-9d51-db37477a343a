@@ -22,7 +22,7 @@ class TradingStrategy(Strategy):
         tqqq_ma = SMA("TQQQ", data, 5)
         current_price = data[-1]["TQQQ"]['close']
 
-        log("moving_average", tqqq_ma)
-        log("current_price", current_price)
+        log("moving_average: " + str(tqqq_ma))
+        log("current_price: " + str(current_price))
 
         return TargetAllocation({"TQQQ": tqqq_stake, "QQQ": qqq_stake})
