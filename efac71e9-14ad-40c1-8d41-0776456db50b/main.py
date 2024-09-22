@@ -46,8 +46,8 @@ class TradingStrategy(Strategy):
     def aggressive_mix(self):
         # Aggressive portfolio weights
         return {
-            "etf": 60,
-            "letf": 40
+            "etf": 50,
+            "letf": 50
         }
     
     @property
