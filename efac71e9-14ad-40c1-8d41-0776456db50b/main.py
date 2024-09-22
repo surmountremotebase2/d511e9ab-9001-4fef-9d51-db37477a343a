@@ -6,10 +6,12 @@ class TradingStrategy(Strategy):
 
     @property
     def etf(self):
+        # Set the symbol for underlying ETF
         return "QQQ"
 
     @property
     def letf(self):
+        # Set the symbol for the leveraged ETF
         return "TQQQ"
 
     @property
@@ -22,22 +24,27 @@ class TradingStrategy(Strategy):
     
     @property
     def conservative(self):
+        # String ID for conservative mix
         return "conservative"
     
     @property
     def aggressive(self):
+        # String ID for aggressive mix
         return "aggressive"
 
     @property
     def long_duration(self):
+        # Duration in Days for Golden Cross long duration
         return 150
 
     @property
     def short_duration(self):
+        # Duration in Days for Golden Cross short duration
         return 30
 
     @property
     def aggressive_mix(self):
+        # Aggressive portfolio weights
         return {
             "etf": 60,
             "letf": 40
@@ -45,6 +52,7 @@ class TradingStrategy(Strategy):
     
     @property
     def conservative_mix(self):
+        # Conservative portolio weights
         return {
             "etf": 80,
             "letf": 20
@@ -60,14 +68,17 @@ class TradingStrategy(Strategy):
             self.strategy = "initial"
             log("Setting initial strategy")
 
+        # Get short duration moving average
         sma_long = SMA(self.letf, data, self.long_duration)
         current_price = data[-1][self.letf]['close']
         moving_average_long = sma_long[len(sma_long)-1]
 
+        # Get long duration moving average
         sma_short = SMA(self.letf, data, self.short_duration)
         moving_average_short = sma_short[len(sma_short)-1]
 
         if moving_average_short < moving_average_long:
+            # if the short term moving average falls below the long term, set strategy to conservative
             if self.strategy != self.conservative:
                 log("Switching to conservative")
                 standard_stake = self.conservative_mix["etf"]
@@ -76,6 +87,7 @@ class TradingStrategy(Strategy):
                 return TargetAllocation({self.letf: leveraged_stake, self.etf : standard_stake})
                 
         else:
+            # if the short term moving average climbs above the long term, set strategy to aggressive
             if self.strategy != self.aggressive:
                 log("Switching to aggressive")
                 standard_stake = self.aggressive_mix["etf"]
