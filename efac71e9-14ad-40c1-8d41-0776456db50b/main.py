@@ -11,6 +11,10 @@ class TradingStrategy(Strategy):
     @property
     def interval(self):
         return "1day"
+    
+    @property
+    def strategy(self):
+        return "balanced"
 
     def run(self, data):
         holdings = data["holdings"]
