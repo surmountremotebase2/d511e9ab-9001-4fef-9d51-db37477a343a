@@ -38,8 +38,8 @@ class TradingStrategy(Strategy):
             self.strategy = self.conservative
             log("Setting initial strategy")
 
-        qqq_stake = 50
-        tqqq_stake = 50
+        standard_stake = 50
+        leveraged_stake = 50
 
         tqqq_ma = SMA("TQQQ", data, 150)
         current_price = data[-1]["TQQQ"]['close']
@@ -51,14 +51,14 @@ class TradingStrategy(Strategy):
         if moving_average_10 > moving_average_30:
             if self.strategy != self.conservative:
                 log("Switching to balanced")
-                qqq_stake = 60
-                tqqq_stake = 40
+                standard_stake = 60
+                leveraged_stake = 40
                 self.strategy = self.conservative
-                return TargetAllocation({"TQQQ": tqqq_stake, "QQQ": qqq_stake})
+                return TargetAllocation({self.letf : leveraged_stake, self.etf : standard_stake})
         else:
             if self.strategy != self.aggressive:
                 log("Switching to agressive")
-                qqq_stake = 80
-                tqqq_stake = 20
+                standard_stake = 80
+                leveraged_stake = 20
                 self.strategy = self.aggressive
-                return TargetAllocation({"TQQQ": tqqq_stake, "QQQ": qqq_stake})
+                return TargetAllocation({self.letf: leveraged_stake, self.etf : standard_stake})
