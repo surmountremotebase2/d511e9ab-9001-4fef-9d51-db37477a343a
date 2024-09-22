@@ -15,7 +15,6 @@ class TradingStrategy(Strategy):
     def run(self, data):
         holdings = data["holdings"]
         data = data["ohlcv"]
-        self.strategy = "balanced"
 
         qqq_stake = 50
         tqqq_stake = 50
