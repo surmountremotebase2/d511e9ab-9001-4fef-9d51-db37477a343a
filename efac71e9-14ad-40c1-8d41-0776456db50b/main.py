@@ -84,7 +84,7 @@ class TradingStrategy(Strategy):
                 standard_stake = self.conservative_mix["etf"]
                 leveraged_stake = self.conservative_mix["letf"]
                 self.strategy = self.conservative
-                return TargetAllocation({self.letf: leveraged_stake, self.etf : standard_stake})
+                #return TargetAllocation({self.letf: leveraged_stake, self.etf : standard_stake})
                 
         else:
             # if the short term moving average climbs above the long term, set strategy to aggressive
@@ -93,4 +93,5 @@ class TradingStrategy(Strategy):
                 standard_stake = self.aggressive_mix["etf"]
                 leveraged_stake = self.aggressive_mix["letf"]
                 self.strategy = self.aggressive
-                return TargetAllocation({self.letf : leveraged_stake, self.etf : standard_stake})
+        
+        return TargetAllocation({self.letf : leveraged_stake, self.etf : standard_stake})
