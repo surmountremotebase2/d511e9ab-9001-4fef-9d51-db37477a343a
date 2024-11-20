@@ -7,12 +7,12 @@ class TradingStrategy(Strategy):
     @property
     def etf(self):
         # Set the symbol for underlying ETF
-        return "QQQ"
+        return "SPY"
 
     @property
     def letf(self):
         # Set the symbol for the leveraged ETF
-        return "TQQQ"
+        return "UPRO"
 
     @property
     def assets(self):
